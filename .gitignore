@@ -1,19 +1,6 @@
-# Node
-node_modules/
-package.json
-package-lock.json
-tsconfig.json
-dist/
-
-# Python
+.env
+.venv/
 __pycache__/
 *.pyc
-.venv/
-*.egg-info/
-
-# Environment
-.env
-
-# IDE
-.vscode/
-.idea/
+.pytest_cache/
+.ruff_cache/
