@@ -17,7 +17,7 @@ router = APIRouter()
     response_model=UserResponse,
     status_code=status.HTTP_201_CREATED,
     summary="Register new user",
-    description="Create a new user with the provided infomation.",
+    description="Create a new user with the provided information.",
 )
 async def register(
     user_data: UserRegister, session: AsyncSession = Depends(get_session)

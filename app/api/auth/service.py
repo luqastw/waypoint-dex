@@ -1,6 +1,6 @@
 from fastapi import HTTPException, status
 
-from app.core.security import hash_password, create_access_token, verify_password
+from app.core.security import hash_password, verify_password
 from app.api.auth.repository import UserRepository
 from app.api.auth.schemas import UserCreate, UserRegister
 from app.models.user import User
