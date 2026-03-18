@@ -11,14 +11,15 @@ services:
         condition: service_healthy
     volumes:
       - .:/app
-    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+      - /app/.venv
+    command: /app/.venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 
   postgres:
     image: postgres:16-alpine
     environment:
-      POSTGRES_USER: waypoint
-      POSTGRES_PASSWORD: waypoint
-      POSTGRES_DB: waypoint_dex
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5432:5432"
     volumes:
