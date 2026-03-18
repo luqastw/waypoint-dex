@@ -1,10 +1,14 @@
 from fastapi import FastAPI
 
+from app.api.auth.router import router as auth_router
+
 app = FastAPI(
     title="Waypoint Dex",
     description="Project & Decision Manager API",
     version="0.1.0",
 )
+
+app.include_router(auth_router, prefix="/auth", tags=["Auth"])
 
 
 @app.get("/health")
