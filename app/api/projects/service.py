@@ -17,7 +17,9 @@ class ProjectService:
     async def get_by_id(self, user: User, project_id: UUID) -> Project:
         project = await self.repository.get_by_id(project_id, user.id)
         if project is None:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail="Project not found"
+            )
 
         return project
 

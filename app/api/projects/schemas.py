@@ -1,21 +1,28 @@
 from datetime import datetime
+from typing import Literal
 from uuid import UUID
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field, HttpUrl
+
+
+ProjectStatus = Literal["active", "inactive", "completed", "archived"]
 
 
 class ProjectCreate(BaseModel):
-    name: str
+    name: str = Field(..., min_length=1, max_length=255)
     description: str | None = None
-    status: str = "active"
-    stack: list[str]
+    status: ProjectStatus = "active"
+    stack: list[str] = Field(..., min_length=1)
+    github_url: HttpUrl | None = None
+    started_at: datetime | None = None
 
 
 class ProjectUpdate(BaseModel):
-    name: str | None = None
+    name: str | None = Field(None, min_length=1, max_length=255)
     description: str | None = None
-    status: str | None = None
-    stack: list[str] | None = None
-    github_url: str | None = None
+    status: ProjectStatus | None = None
+    stack: list[str] | None = Field(None, min_length=1)
+    github_url: HttpUrl | None = None
+    started_at: datetime | None = None
 
 
 class ProjectResponse(BaseModel):

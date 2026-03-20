@@ -20,7 +20,9 @@ class Project(Base):
     status = Column(String, default="active")
     stack = Column(ARRAY(String), nullable=False)
     github_url = Column(String, nullable=True)
-    owner_id = Column(UUID(as_uuid=True), ForeignKey("users.id"))
+    owner_id = Column(
+        UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False
+    )
     started_at = Column(DateTime(timezone=True), nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(

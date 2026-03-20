@@ -53,7 +53,7 @@ async def update(
 ):
     repository = ProjectRepository(session)
     service = ProjectService(repository)
-    return await service.update(data, project_id, current_user)
+    return await service.update(data, current_user, project_id)
 
 
 @router.delete("/{project_id}", status_code=status.HTTP_204_NO_CONTENT)
