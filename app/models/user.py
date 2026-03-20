@@ -1,6 +1,7 @@
 from uuid import uuid4
 
 from sqlalchemy import Boolean, Column, UUID, DateTime, String, func
+from sqlalchemy.orm import relationship
 from app.core.database import Base
 
 
@@ -12,3 +13,5 @@ class User(Base):
     hashed_password = Column(String, nullable=False)
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    projects = relationship("Project", back_populates="owner")
