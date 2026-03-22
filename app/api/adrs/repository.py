@@ -34,8 +34,11 @@ class ADRRepository:
         await self.session.refresh(adr)
         return adr
 
-    async def update(self, data: ADRUpdate, id: UUID, project_id: UUID) -> ADR:
+    async def update(self, data: ADRUpdate, id: UUID, project_id: UUID) -> ADR | None:
         adr = await self.get_by_id(id, project_id)
+
+        if adr is None:
+            return None
 
         for field, value in data.model_dump(exclude_unset=True).items():
             setattr(adr, field, value)
