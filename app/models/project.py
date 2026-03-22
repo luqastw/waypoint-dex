@@ -30,3 +30,4 @@ class Project(Base):
     )
 
     owner = relationship("User", back_populates="projects")
+    adrs = relationship("ADR", back_populates="project")
