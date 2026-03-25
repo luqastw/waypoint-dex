@@ -1,40 +1,30 @@
-from enum import Enum
-from pydantic import BaseModel, ConfigDict
-from typing import Optional
+from pydantic import BaseModel
 from datetime import datetime
 from uuid import UUID
 
-class TaskStatus(str, Enum):
-    TODO = "todo"
-    IN_PROGRESS = "in_progress"
-    DONE = "done"
-
-class TaskPriority(str, Enum):
-    LOW = "low"
-    MEDIUM = "medium"
-    HIGH = "high"
+from app.core.enums import TaskPriority, TaskStatus
 
 class TaskCreate(BaseModel):
     title: str
-    description: Optional[str] = None
+    description: str | None = None
     status: TaskStatus = TaskStatus.TODO
     priority: TaskPriority = TaskPriority.MEDIUM
     project_id: UUID
-    deadline: Optional[datetime] = None
+    deadline: datetime | None = None
 
 class TaskUpdate(BaseModel):
-    title: Optional[str] = None
-    description: Optional[str] = None
-    status: Optional[TaskStatus] = None
-    priority: Optional[TaskPriority] = None
-    deadline: Optional[datetime] = None
+    title: str | None = None
+    description: str | None = None
+    status: TaskStatus | None = None
+    priority: TaskPriority | None = None
+    deadline: datetime | None = None
 
 class TaskResponse(BaseModel):
     id: UUID
     title: str
-    description: Optional[str]
+    description: str | None
     status: TaskStatus
     priority: TaskPriority
     project_id: UUID
-    deadline: Optional[datetime]
+    deadline: datetime | None
     created_at: datetime

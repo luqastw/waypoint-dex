@@ -9,6 +9,7 @@ from sqlalchemy import (
     func,
 )
 from sqlalchemy.orm import relationship
+
 from app.core.database import Base
 
 
@@ -31,3 +32,4 @@ class Project(Base):
 
     owner = relationship("User", back_populates="projects")
     adrs = relationship("ADR", back_populates="project")
+    tasks = relationship("Task", back_populates="project")
